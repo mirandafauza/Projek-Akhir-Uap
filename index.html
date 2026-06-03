@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Karirku – Platform Karir #1 Indonesia</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'sans-serif'] },
+        colors: {
+          purple: { 900: '#3D0087', 800: '#5B00B5', 700: '#7B2CBF', 600: '#9B4FD8', 500: '#B97FEF', 400: '#D4AEFF', 300: '#E8D5FF', 200: '#F3EAFF', 100: '#FAF5FF' },
+          pink: { 600: '#C0007A', 500: '#D9009A', 400: '#F020B0', 300: '#F77FD0' },
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone-shell" id="app">
+
+  <!-- ====== SIDEBAR (tablet/desktop only) ====== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <svg width="36" height="36" viewBox="0 0 120 120" fill="none">
+        <path d="M28 20 L28 100" stroke="url(#skg1)" stroke-width="22" stroke-linecap="round"/>
+        <path d="M28 58 L72 20" stroke="url(#skg2)" stroke-width="22" stroke-linecap="round"/>
+        <path d="M28 58 L78 100" stroke="url(#skg3)" stroke-width="22" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="skg1" x1="28" y1="20" x2="28" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#7B2CBF"/><stop offset="1" stop-color="#E040D0"/></linearGradient>
+          <linearGradient id="skg2" x1="28" y1="58" x2="72" y2="20" gradientUnits="userSpaceOnUse"><stop stop-color="#5B5BFF"/><stop offset="1" stop-color="#9B4FD8"/></linearGradient>
+          <linearGradient id="skg3" x1="28" y1="58" x2="78" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#C0007A"/><stop offset="1" stop-color="#FF50A0"/></linearGradient>
+        </defs>
+      </svg>
+      <span>Karirku</span>
+    </div>
+    <div class="nav-item" id="snav-home" onclick="switchNav('home')"><i class="fas fa-house"></i><span>Home</span></div>
+    <div class="nav-item" id="snav-kursus" onclick="switchNav('kursus')"><i class="fas fa-book-open"></i><span>Kursus</span></div>
+    <div class="nav-item" id="snav-lowongan" onclick="switchNav('lowongan')"><i class="fas fa-briefcase"></i><span>Lowongan</span></div>
+    <div class="nav-item" id="snav-cv" onclick="switchNav('cv');setStep(1);"><i class="fas fa-file-lines"></i><span>CV AI</span></div>
+    <div class="nav-item" id="snav-profil" onclick="switchNav('profil')"><i class="fas fa-circle-user"></i><span>Profil</span></div>
+    <div style="flex:1;"></div>
+    <div class="nav-item" onclick="showPage('splash')" style="color:#C0007A;">
+      <i class="fas fa-right-from-bracket" style="color:#C0007A;"></i><span style="color:#C0007A;">Keluar</span>
+    </div>
+  </aside>
+
+  <!-- ====== APP LAYOUT WRAPPER ====== -->
+  <div class="app-layout" id="app-layout">
+
+  <!-- ====== SPLASH SCREEN ====== -->
+  <div id="page-splash" class="page active auth-page" style="height:100%;">
+    <!-- Mobile layout -->
+    <div class="grad-soft auth-card auth-card-mobile" style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding: 60px 32px 48px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#333;" class="status-bar-row">
+        <span>9:41</span>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+        <div style="position:relative;">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="120" rx="32" fill="transparent"/>
+            <path d="M28 20 L28 100" stroke="url(#kg1)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L72 20" stroke="url(#kg2)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L78 100" stroke="url(#kg3)" stroke-width="22" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="kg1" x1="28" y1="20" x2="28" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#7B2CBF"/><stop offset="1" stop-color="#E040D0"/></linearGradient>
+              <linearGradient id="kg2" x1="28" y1="58" x2="72" y2="20" gradientUnits="userSpaceOnUse"><stop stop-color="#5B5BFF"/><stop offset="1" stop-color="#9B4FD8"/></linearGradient>
+              <linearGradient id="kg3" x1="28" y1="58" x2="78" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#C0007A"/><stop offset="1" stop-color="#FF50A0"/></linearGradient>
+            </defs>
+          </svg>
+          <span style="position:absolute;top:4px;right:-2px;font-size:22px;">&#10022;</span>
+        </div>
+        <div style="font-size:30px;font-weight:800;color:#5B00B5;letter-spacing:-0.5px;">Karirku</div>
+        <p style="font-size:13px;color:#888;text-align:center;max-width:220px;line-height:1.6;">Platform pengembangan skill &amp; portal lowongan kerja #1 di Indonesia</p>
+      </div>
+      <div style="display:flex;gap:12px;width:100%;">
+        <button class="btn-primary" style="flex:1;" onclick="showPage('login')">Login</button>
+        <button class="btn-outline" style="flex:1;" onclick="showPage('register')">Register</button>
+      </div>
+      <div class="home-indicator" style="margin-top:20px;"></div>
+    </div>
+    <!-- Desktop two-column layout -->
+    <div class="auth-desktop-layout">
+      <div class="auth-desktop-left">
+        <div class="auth-desktop-brand">
+          <svg width="72" height="72" viewBox="0 0 120 120" fill="none">
+            <path d="M28 20 L28 100" stroke="rgba(255,255,255,0.95)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L72 20" stroke="rgba(255,255,255,0.85)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L78 100" stroke="rgba(255,255,255,0.75)" stroke-width="22" stroke-linecap="round"/>
+          </svg>
+          <div style="font-size:42px;font-weight:800;color:white;letter-spacing:-1px;margin-top:16px;">Karirku</div>
+          <p style="font-size:17px;color:rgba(255,255,255,0.8);margin-top:12px;line-height:1.7;max-width:360px;">Platform pengembangan skill &amp; portal lowongan kerja #1 di Indonesia</p>
+        </div>
+        <div class="auth-desktop-features">
+          <div class="auth-feature-item"><i class="fas fa-briefcase"></i><span>1.234+ Lowongan Aktif</span></div>
+          <div class="auth-feature-item"><i class="fas fa-graduation-cap"></i><span>150+ Kursus Tersedia</span></div>
+          <div class="auth-feature-item"><i class="fas fa-file-lines"></i><span>AI CV Generator Gratis</span></div>
+        </div>
+      </div>
+      <div class="auth-desktop-right">
+        <div style="text-align:center;margin-bottom:32px;">
+          <div style="font-size:28px;font-weight:800;color:#1a1a2e;margin-bottom:8px;">Selamat Datang!</div>
+          <p style="font-size:14px;color:#888;">Mulai perjalanan karir terbaik kamu hari ini</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;width:100%;">
+          <button class="btn-primary" onclick="showPage('login')">Masuk ke Akun</button>
+          <button class="btn-outline" style="width:100%;padding:14px;" onclick="showPage('register')">Buat Akun Baru</button>
+          <div style="text-align:center;margin-top:8px;">
+            <p style="font-size:12px;color:#bbb;">Dengan mendaftar, kamu menyetujui <span style="color:#7B2CBF;cursor:pointer;">Syarat &amp; Ketentuan</span> kami</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- ====== LOGIN PAGE ====== -->
+  <div id="page-login" class="page auth-page" style="height:100%;">
+    <!-- Mobile layout -->
+    <div class="grad-soft auth-card auth-card-mobile" style="flex:1;display:flex;flex-direction:column;padding:60px 32px 40px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#333;margin-bottom:32px;" class="status-bar-row">
+        <span>9:41</span>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+        <div style="position:relative;margin-bottom:8px;">
+          <svg width="70" height="70" viewBox="0 0 120 120" fill="none">
+            <path d="M28 20 L28 100" stroke="url(#lkg1)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L72 20" stroke="url(#lkg2)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L78 100" stroke="url(#lkg3)" stroke-width="22" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="lkg1" x1="28" y1="20" x2="28" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#7B2CBF"/><stop offset="1" stop-color="#E040D0"/></linearGradient>
+              <linearGradient id="lkg2" x1="28" y1="58" x2="72" y2="20" gradientUnits="userSpaceOnUse"><stop stop-color="#5B5BFF"/><stop offset="1" stop-color="#9B4FD8"/></linearGradient>
+              <linearGradient id="lkg3" x1="28" y1="58" x2="78" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#C0007A"/><stop offset="1" stop-color="#FF50A0"/></linearGradient>
+            </defs>
+          </svg>
+          <span style="position:absolute;top:2px;right:-4px;font-size:16px;color:#7B2CBF;">&#10022;</span>
+        </div>
+        <div style="font-size:28px;font-weight:800;color:#5B00B5;margin-bottom:28px;">Login</div>
+        <div style="width:100%;display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Email</label>
+            <input class="input-field" type="email" placeholder="Masukkan Email">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Password</label>
+            <input class="input-field" type="password" placeholder="Masukkan Password">
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555;cursor:pointer;">
+            <input type="checkbox" checked style="accent-color:#7B2CBF;width:16px;height:16px;">
+            Ingatkan saya
+          </label>
+          <button class="btn-primary" onclick="switchNav('home')">Login</button>
+          <p style="text-align:center;font-size:13px;color:#555;">
+            Don't have an account? <span onclick="showPage('register')" style="color:#7B2CBF;font-weight:700;cursor:pointer;">Sign up</span>
+          </p>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+    <!-- Desktop two-column layout -->
+    <div class="auth-desktop-layout">
+      <div class="auth-desktop-left">
+        <div class="auth-desktop-brand">
+          <svg width="72" height="72" viewBox="0 0 120 120" fill="none">
+            <path d="M28 20 L28 100" stroke="rgba(255,255,255,0.95)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L72 20" stroke="rgba(255,255,255,0.85)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L78 100" stroke="rgba(255,255,255,0.75)" stroke-width="22" stroke-linecap="round"/>
+          </svg>
+          <div style="font-size:42px;font-weight:800;color:white;letter-spacing:-1px;margin-top:16px;">Karirku</div>
+          <p style="font-size:17px;color:rgba(255,255,255,0.8);margin-top:12px;line-height:1.7;max-width:360px;">Kembangkan skill kamu dan raih pekerjaan impian bersama Karirku.</p>
+        </div>
+        <div class="auth-desktop-features">
+          <div class="auth-feature-item"><i class="fas fa-briefcase"></i><span>1.234+ Lowongan Aktif</span></div>
+          <div class="auth-feature-item"><i class="fas fa-graduation-cap"></i><span>150+ Kursus Tersedia</span></div>
+          <div class="auth-feature-item"><i class="fas fa-file-lines"></i><span>AI CV Generator Gratis</span></div>
+        </div>
+      </div>
+      <div class="auth-desktop-right">
+        <div style="margin-bottom:32px;">
+          <div style="font-size:28px;font-weight:800;color:#1a1a2e;margin-bottom:8px;">Masuk Akun</div>
+          <p style="font-size:14px;color:#888;">Selamat datang kembali! Masukkan detail akunmu.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;width:100%;">
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Email</label>
+            <input class="input-field" type="email" placeholder="Masukkan Email">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Password</label>
+            <input class="input-field" type="password" placeholder="Masukkan Password">
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555;cursor:pointer;">
+              <input type="checkbox" checked style="accent-color:#7B2CBF;width:16px;height:16px;">Ingatkan saya
+            </label>
+            <span style="font-size:13px;color:#7B2CBF;font-weight:600;cursor:pointer;">Lupa Password?</span>
+          </div>
+          <button class="btn-primary" onclick="switchNav('home')">Masuk</button>
+          <p style="text-align:center;font-size:13px;color:#555;">
+            Belum punya akun? <span onclick="showPage('register')" style="color:#7B2CBF;font-weight:700;cursor:pointer;">Daftar sekarang</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== REGISTER PAGE ====== -->
+  <div id="page-register" class="page auth-page" style="height:100%;">
+    <!-- Mobile layout -->
+    <div class="grad-soft auth-card auth-card-mobile" style="flex:1;display:flex;flex-direction:column;padding:48px 32px 36px;overflow-y:auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#333;margin-bottom:24px;" class="status-bar-row">
+        <span>9:41</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div style="position:relative;margin-bottom:8px;">
+          <svg width="70" height="70" viewBox="0 0 120 120" fill="none">
+            <path d="M28 20 L28 100" stroke="url(#rkg1)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L72 20" stroke="url(#rkg2)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L78 100" stroke="url(#rkg3)" stroke-width="22" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="rkg1" x1="28" y1="20" x2="28" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#7B2CBF"/><stop offset="1" stop-color="#E040D0"/></linearGradient>
+              <linearGradient id="rkg2" x1="28" y1="58" x2="72" y2="20" gradientUnits="userSpaceOnUse"><stop stop-color="#5B5BFF"/><stop offset="1" stop-color="#9B4FD8"/></linearGradient>
+              <linearGradient id="rkg3" x1="28" y1="58" x2="78" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#C0007A"/><stop offset="1" stop-color="#FF50A0"/></linearGradient>
+            </defs>
+          </svg>
+          <span style="position:absolute;top:2px;right:-4px;font-size:16px;color:#7B2CBF;">&#10022;</span>
+        </div>
+        <div style="font-size:28px;font-weight:800;color:#5B00B5;margin-bottom:24px;">Create Account</div>
+        <div style="width:100%;display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Nama Lengkap</label>
+            <input class="input-field" type="text" placeholder="Nama Lengkap">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Email</label>
+            <input class="input-field" type="email" placeholder="Email">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Password</label>
+            <input class="input-field" type="password" placeholder="Password">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Konfirmasi Password</label>
+            <input class="input-field" type="password" placeholder="Konfirmasi Password">
+          </div>
+          <button class="btn-primary" onclick="switchNav('home')">Daftar</button>
+          <p style="text-align:center;font-size:13px;color:#555;">
+            Already have an account? <span onclick="showPage('login')" style="color:#7B2CBF;font-weight:700;cursor:pointer;">Sign in</span>
+          </p>
+        </div>
+      </div>
+      <div class="home-indicator" style="margin-top:16px;"></div>
+    </div>
+    <!-- Desktop two-column layout -->
+    <div class="auth-desktop-layout">
+      <div class="auth-desktop-left">
+        <div class="auth-desktop-brand">
+          <svg width="72" height="72" viewBox="0 0 120 120" fill="none">
+            <path d="M28 20 L28 100" stroke="rgba(255,255,255,0.95)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L72 20" stroke="rgba(255,255,255,0.85)" stroke-width="22" stroke-linecap="round"/>
+            <path d="M28 58 L78 100" stroke="rgba(255,255,255,0.75)" stroke-width="22" stroke-linecap="round"/>
+          </svg>
+          <div style="font-size:42px;font-weight:800;color:white;letter-spacing:-1px;margin-top:16px;">Karirku</div>
+          <p style="font-size:17px;color:rgba(255,255,255,0.8);margin-top:12px;line-height:1.7;max-width:360px;">Bergabunglah dengan jutaan pencari kerja yang telah sukses bersama Karirku.</p>
+        </div>
+        <div class="auth-desktop-features">
+          <div class="auth-feature-item"><i class="fas fa-briefcase"></i><span>1.234+ Lowongan Aktif</span></div>
+          <div class="auth-feature-item"><i class="fas fa-graduation-cap"></i><span>150+ Kursus Tersedia</span></div>
+          <div class="auth-feature-item"><i class="fas fa-file-lines"></i><span>AI CV Generator Gratis</span></div>
+        </div>
+      </div>
+      <div class="auth-desktop-right">
+        <div style="margin-bottom:28px;">
+          <div style="font-size:28px;font-weight:800;color:#1a1a2e;margin-bottom:8px;">Buat Akun</div>
+          <p style="font-size:14px;color:#888;">Daftar gratis dan mulai karir terbaikmu.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;width:100%;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Nama Depan</label>
+              <input class="input-field" type="text" placeholder="Nama Depan">
+            </div>
+            <div>
+              <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Nama Belakang</label>
+              <input class="input-field" type="text" placeholder="Nama Belakang">
+            </div>
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Email</label>
+            <input class="input-field" type="email" placeholder="Email">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Password</label>
+              <input class="input-field" type="password" placeholder="Password">
+            </div>
+            <div>
+              <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Konfirmasi Password</label>
+              <input class="input-field" type="password" placeholder="Konfirmasi">
+            </div>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#555;cursor:pointer;line-height:1.5;">
+            <input type="checkbox" style="accent-color:#7B2CBF;width:16px;height:16px;margin-top:2px;flex-shrink:0;">
+            Saya menyetujui <span style="color:#7B2CBF;font-weight:600;">&nbsp;Syarat &amp; Ketentuan</span>&nbsp;dan&nbsp;<span style="color:#7B2CBF;font-weight:600;">Kebijakan Privasi</span>
+          </label>
+          <button class="btn-primary" onclick="switchNav('home')">Daftar Sekarang</button>
+          <p style="text-align:center;font-size:13px;color:#555;">
+            Sudah punya akun? <span onclick="showPage('login')" style="color:#7B2CBF;font-weight:700;cursor:pointer;">Masuk di sini</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- ====== HOME PAGE ====== -->
+  <div id="page-home" class="page" style="height:100%;flex-direction:column;">
+    <div style="background:white;padding:16px 20px 8px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;" class="status-bar-row">
+      <div style="font-size:13px;font-weight:700;color:#333;">9:41</div>
+    </div>
+    <div class="content-scroll" style="flex:1;">
+      <div class="page-inner-content" style="padding:16px 20px 100px;">
+        <h1 style="font-size:26px;font-weight:800;color:#1a1a2e;line-height:1.3;margin-bottom:6px;">Find Your Dream Job<br>With <span style="color:#7B2CBF;">Karirku</span></h1>
+        <p style="font-size:12px;color:#888;margin-bottom:20px;">Platform pengembangan skill & portal lowongan kerja #1 di Indonesia</p>
+        <div class="home-stats-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div style="background:linear-gradient(135deg,#3B82F6,#1D4ED8);border-radius:16px;padding:16px;color:white;">
+            <i class="fas fa-chart-line" style="font-size:20px;margin-bottom:8px;opacity:0.9;"></i>
+            <div style="font-size:22px;font-weight:800;">1,234+</div>
+            <div style="font-size:12px;opacity:0.85;margin-top:2px;">Lowongan Aktif</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#22C55E,#15803D);border-radius:16px;padding:16px;color:white;">
+            <i class="fas fa-graduation-cap" style="font-size:20px;margin-bottom:8px;opacity:0.9;"></i>
+            <div style="font-size:22px;font-weight:800;">150+</div>
+            <div style="font-size:12px;opacity:0.85;margin-top:2px;">Kursus Tersedia</div>
+          </div>
+        </div>
+        <div class="ai-banner" onclick="switchNav('cv'); setStep(1);" style="cursor:pointer;">
+          <div style="font-size:16px;font-weight:800;color:white;margin-bottom:6px;">✦ AI CV Generator</div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;margin-bottom:14px;">Buat CV profesional dengan bantuan AI dalam 3 langkah mudah!</p>
+          <button style="background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.5);color:white;padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;backdrop-filter:blur(4px);">Coba Sekarang →</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div style="font-size:18px;font-weight:800;color:#1a1a2e;">Kursus Populer</div>
+          <span onclick="switchNav('kursus')" style="font-size:12px;color:#7B2CBF;font-weight:600;cursor:pointer;">Lihat Semua →</span>
+        </div>
+        <div class="pop-cards-grid">
+          <div class="pop-card">
+            <span style="background:#ede8ff;color:#7B2CBF;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:8px;">Design</span>
+            <div style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">UI/UX Design Fundamental</div>
+            <div style="font-size:12px;color:#888;display:flex;align-items:center;gap:4px;margin-bottom:10px;"><i class="fas fa-user" style="font-size:11px;"></i> 2.341 siswa</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:14px;font-weight:700;color:#22C55E;">Gratis</span>
+              <span onclick="switchNav('kursus')" style="font-size:13px;color:#7B2CBF;font-weight:600;cursor:pointer;">Lihat Detail →</span>
+            </div>
+          </div>
+          <div class="pop-card">
+            <span style="background:#ffe8f5;color:#C0007A;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:8px;">Programming</span>
+            <div style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">JavaScript for Beginners</div>
+            <div style="font-size:12px;color:#888;display:flex;align-items:center;gap:4px;margin-bottom:10px;"><i class="fas fa-user" style="font-size:11px;"></i> 2.341 siswa</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:14px;font-weight:700;color:#333;">Rp 150.000</span>
+              <span onclick="switchNav('kursus')" style="font-size:13px;color:#7B2CBF;font-weight:600;cursor:pointer;">Lihat Detail →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item active" onclick="switchNav('home')"><i class="fas fa-house"></i><span>Home</span></div>
+      <div class="nav-item" onclick="switchNav('kursus')"><i class="fas fa-book-open"></i><span>Kursus</span></div>
+      <div class="nav-item" onclick="switchNav('lowongan')"><i class="fas fa-briefcase"></i><span>Lowongan</span></div>
+      <div class="nav-item" onclick="switchNav('cv');setStep(1);"><i class="fas fa-file-lines"></i><span>CV AI</span></div>
+      <div class="nav-item" onclick="switchNav('profil')"><i class="fas fa-circle-user"></i><span>Profil</span></div>
+    </div>
+  </div>
+
+  <!-- ====== KURSUS PAGE ====== -->
+  <div id="page-kursus" class="page" style="height:100%;flex-direction:column;">
+    <div style="background:white;padding:16px 20px 8px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;" class="status-bar-row">
+      <div style="font-size:13px;font-weight:700;color:#333;">9:41</div>
+      
+    </div>
+    <div class="content-scroll" style="flex:1;">
+      <div class="page-inner-content" style="padding:16px 20px 100px;">
+        <h1 style="font-size:26px;font-weight:800;color:#7B2CBF;margin-bottom:16px;">Kursus</h1>
+        <div style="display:flex;align-items:center;gap:10px;background:#f5f3ff;border-radius:14px;padding:12px 16px;margin-bottom:16px;border:1.5px solid #ede8ff;">
+          <i class="fas fa-magnifying-glass" style="color:#aaa;font-size:15px;"></i>
+          <input type="text" placeholder="Cari Kursus..." style="background:transparent;border:none;outline:none;font-size:14px;color:#333;width:100%;" class="search-kursus-input">
+        </div>
+        <div class="h-scroll" style="margin-bottom:20px;">
+          <div class="cat-pill active" onclick="setCatActive(this)">Semua</div>
+          <div class="cat-pill" onclick="setCatActive(this)">Programming</div>
+          <div class="cat-pill" onclick="setCatActive(this)">Design</div>
+          <div class="cat-pill" onclick="setCatActive(this)">Marketing</div>
+        </div>
+        <div class="kursus-grid">
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#c4b5fd,#818cf8);display:flex;align-items:center;justify-content:center;">
+              <i class="fas fa-code" style="font-size:40px;color:rgba(255,255,255,0.5);"></i>
+            </div>
+            <div style="padding:14px;">
+              <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:#555;background:#f3f3f3;padding:3px 8px;border-radius:6px;">Design</span>
+                <span style="font-size:11px;color:#555;background:#f3f3f3;padding:3px 8px;border-radius:6px;">Programming</span>
+                <span style="font-size:11px;color:#555;background:#f3f3f3;padding:3px 8px;border-radius:6px;">Beginner</span>
+              </div>
+              <div style="font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">Fullstack Developer</div>
+              <div style="font-size:12px;color:#888;margin-bottom:6px;">Syahda Zaahirah</div>
+              <div style="display:flex;align-items:center;gap:4px;margin-bottom:12px;">
+                <i class="fas fa-star" style="color:#F59E0B;font-size:13px;"></i>
+                <span style="font-size:13px;font-weight:600;color:#333;">4.9</span>
+              </div>
+              <div style="height:1px;background:#f0f0f0;margin-bottom:12px;"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:15px;font-weight:700;color:#1a1a2e;">Rp 350.000</span>
+                <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:9px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;">Daftar</button>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#fda4af,#f472b6);display:flex;align-items:center;justify-content:center;">
+              <i class="fas fa-bullhorn" style="font-size:40px;color:rgba(255,255,255,0.5);"></i>
+            </div>
+            <div style="padding:14px;">
+              <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:#555;background:#f3f3f3;padding:3px 8px;border-radius:6px;">Marketing</span>
+                <span style="font-size:11px;color:#555;background:#f3f3f3;padding:3px 8px;border-radius:6px;">Beginner</span>
+              </div>
+              <div style="font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">Digital Marketing Pro</div>
+              <div style="font-size:12px;color:#888;margin-bottom:6px;">Wardatul Umma</div>
+              <div style="display:flex;align-items:center;gap:4px;margin-bottom:12px;">
+                <i class="fas fa-star" style="color:#F59E0B;font-size:13px;"></i>
+                <span style="font-size:13px;font-weight:600;color:#333;">4.9</span>
+              </div>
+              <div style="height:1px;background:#f0f0f0;margin-bottom:12px;"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:15px;font-weight:700;color:#1a1a2e;">Rp 350.000</span>
+                <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:9px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;">Daftar</button>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#6ee7b7,#34d399);display:flex;align-items:center;justify-content:center;">
+              <i class="fas fa-chart-pie" style="font-size:40px;color:rgba(255,255,255,0.5);"></i>
+            </div>
+            <div style="padding:14px;">
+              <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:#555;background:#f3f3f3;padding:3px 8px;border-radius:6px;">Data</span>
+                <span style="font-size:11px;color:#555;background:#f3f3f3;padding:3px 8px;border-radius:6px;">Intermediate</span>
+              </div>
+              <div style="font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">Data Analytics Mastery</div>
+              <div style="font-size:12px;color:#888;margin-bottom:6px;">Rizal Firmansyah</div>
+              <div style="display:flex;align-items:center;gap:4px;margin-bottom:12px;">
+                <i class="fas fa-star" style="color:#F59E0B;font-size:13px;"></i>
+                <span style="font-size:13px;font-weight:600;color:#333;">4.8</span>
+              </div>
+              <div style="height:1px;background:#f0f0f0;margin-bottom:12px;"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:15px;font-weight:700;color:#22C55E;">Gratis</span>
+                <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:9px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;">Daftar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="switchNav('home')"><i class="fas fa-house"></i><span>Home</span></div>
+      <div class="nav-item active" onclick="switchNav('kursus')"><i class="fas fa-book-open"></i><span>Kursus</span></div>
+      <div class="nav-item" onclick="switchNav('lowongan')"><i class="fas fa-briefcase"></i><span>Lowongan</span></div>
+      <div class="nav-item" onclick="switchNav('cv');setStep(1);"><i class="fas fa-file-lines"></i><span>CV AI</span></div>
+      <div class="nav-item" onclick="switchNav('profil')"><i class="fas fa-circle-user"></i><span>Profil</span></div>
+    </div>
+  </div>
+
+  <!-- ====== LOWONGAN PAGE ====== -->
+  <div id="page-lowongan" class="page" style="height:100%;flex-direction:column;">
+    <div style="background:white;padding:16px 20px 8px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;" class="status-bar-row">
+      <div style="font-size:13px;font-weight:700;color:#333;">9:41</div>
+      
+    </div>
+    <div class="content-scroll" style="flex:1;">
+      <div class="page-inner-content" style="padding:16px 20px 100px;">
+        <h1 style="font-size:26px;font-weight:800;color:#7B2CBF;margin-bottom:16px;">Lowongan Kerja</h1>
+        <div style="display:flex;align-items:center;gap:10px;background:#f5f3ff;border-radius:14px;padding:12px 16px;margin-bottom:10px;border:1.5px solid #ede8ff;">
+          <i class="fas fa-magnifying-glass" style="color:#aaa;font-size:15px;"></i>
+          <input type="text" placeholder="Cari Posisi atau perusahaan..." style="background:transparent;border:none;outline:none;font-size:14px;color:#333;width:100%;">
+        </div>
+        <div style="background:#f5f3ff;border-radius:14px;padding:12px 16px;margin-bottom:16px;border:1.5px solid #ede8ff;">
+          <input type="text" placeholder="Lokasi" style="background:transparent;border:none;outline:none;font-size:14px;color:#333;width:100%;">
+        </div>
+        <div class="h-scroll" style="margin-bottom:20px;">
+          <div class="cat-pill active" onclick="setCatActive(this)">Semua</div>
+          <div class="cat-pill" onclick="setCatActive(this)">Full-time</div>
+          <div class="cat-pill" onclick="setCatActive(this)">Part-time</div>
+          <div class="cat-pill" onclick="setCatActive(this)">Remote</div>
+        </div>
+        <div style="font-size:16px;font-weight:800;color:#1a1a2e;margin-bottom:12px;">Disarankan Untuk Anda</div>
+        <div class="job-grid-suggested" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+          <div class="job-card">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <span style="background:#ede8ff;color:#7B2CBF;font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;">Remote</span>
+            </div>
+            <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">UI/UX Designer</div>
+            <div style="font-size:11px;color:#888;margin-bottom:4px;">Startup</div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:12px;">Jakarta, IDN &nbsp;·&nbsp; 3 hari lalu</div>
+            <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;width:100%;">Daftar</button>
+          </div>
+          <div class="job-card">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <span style="background:#fce8ff;color:#C0007A;font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;">Hybrid</span>
+            </div>
+            <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">Frontend Dev</div>
+            <div style="font-size:11px;color:#888;margin-bottom:4px;">Tech Co.</div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:12px;">Bandung, IDN &nbsp;·&nbsp; 1 hari lalu</div>
+            <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;width:100%;">Daftar</button>
+          </div>
+          <div class="job-card">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <span style="background:#e0f5e0;color:#15803D;font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;">WFO</span>
+            </div>
+            <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">Product Designer</div>
+            <div style="font-size:11px;color:#888;margin-bottom:4px;">Agency</div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:12px;">Jakarta, IDN &nbsp;·&nbsp; 3 hari lalu</div>
+            <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;width:100%;">Daftar</button>
+          </div>
+          <div class="job-card">
+            <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+              <span style="background:#fce8ff;color:#C0007A;font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;">Industry</span>
+            </div>
+            <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">HRD</div>
+            <div style="font-size:11px;color:#888;margin-bottom:4px;">Industry</div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:12px;">Jakarta, IDN &nbsp;·&nbsp; 3 hari lalu</div>
+            <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;width:100%;">Daftar</button>
+          </div>
+        </div>
+        <div style="font-size:16px;font-weight:800;color:#1a1a2e;margin-bottom:12px;">Baru Ditambahkan</div>
+        <div style="background:#f9f5ff;border-radius:16px;padding:16px;">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+            <span style="background:#e0f5e0;color:#15803D;font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;">WFO</span>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:2px;">Product Designer</div>
+          <div style="font-size:12px;color:#888;margin-bottom:4px;">Agency</div>
+          <div style="font-size:12px;color:#aaa;margin-bottom:14px;">Jakarta, IDN &nbsp;·&nbsp; 3 hari yang lalu</div>
+          <button style="background:linear-gradient(135deg,#7B2CBF,#C0007A);color:white;padding:9px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;">Daftar</button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="switchNav('home')"><i class="fas fa-house"></i><span>Home</span></div>
+      <div class="nav-item" onclick="switchNav('kursus')"><i class="fas fa-book-open"></i><span>Kursus</span></div>
+      <div class="nav-item active" onclick="switchNav('lowongan')"><i class="fas fa-briefcase"></i><span>Lowongan</span></div>
+      <div class="nav-item" onclick="switchNav('cv');setStep(1);"><i class="fas fa-file-lines"></i><span>CV AI</span></div>
+      <div class="nav-item" onclick="switchNav('profil')"><i class="fas fa-circle-user"></i><span>Profil</span></div>
+    </div>
+  </div>
+
+  <!-- ====== CV AI PAGE ====== -->
+  <div id="page-cv" class="page" style="height:100%;flex-direction:column;">
+    <div class="grad-main" style="padding:16px 20px 24px;flex-shrink:0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:16px;" class="status-bar-row">
+        <span>9:41</span>
+        
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+        <span style="font-size:22px;">✦</span>
+        <span style="font-size:22px;font-weight:800;color:white;">AI CV Generator</span>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.8);margin-bottom:20px;">Buat CV profesional dengan bantuan AI dalam 3 langkah mudah</p>
+      <div style="display:flex;align-items:center;gap:8px;max-width:400px;">
+        <div class="step-circle active" id="step-c1">1</div>
+        <div class="step-line" id="step-l1"></div>
+        <div class="step-circle" id="step-c2">2</div>
+        <div class="step-line" id="step-l2"></div>
+        <div class="step-circle" id="step-c3">3</div>
+      </div>
+    </div>
+    <div class="content-scroll" style="flex:1;">
+      <!-- STEP 1: Data Diri -->
+      <div id="cv-step1" style="padding:20px 20px 100px;">
+        <div class="page-inner-content" style="padding:0;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+          <i class="fas fa-circle-user" style="color:#7B2CBF;font-size:18px;"></i>
+          <span style="font-size:18px;font-weight:800;color:#1a1a2e;">Data Diri</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Nama Lengkap</label>
+            <input class="input-field" type="text" placeholder="John Doe" value="John Doe">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Email</label>
+            <input class="input-field" type="email" placeholder="john@example.com" value="john@example.com">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Nomor Telepon</label>
+            <input class="input-field" type="tel" placeholder="+62 375 3442 2322">
+          </div>
+          <div>
+            <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:6px;">Kota</label>
+            <input class="input-field" type="text" placeholder="Malang" value="Malang">
+          </div>
+          <button class="btn-primary" onclick="setStep(2)" style="margin-top:8px;">Selanjutnya →</button>
+        </div>
+        </div>
+      </div>
+      <!-- STEP 2: Pengalaman -->
+      <div id="cv-step2" style="padding:20px 20px 100px;display:none;">
+        <div class="page-inner-content" style="padding:0;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+          <i class="fas fa-briefcase" style="color:#7B2CBF;font-size:18px;"></i>
+          <span style="font-size:18px;font-weight:800;color:#1a1a2e;">Pengalaman & Pendidikan</span>
+        </div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:12px;">Pengalaman Kerja</div>
+        <div style="background:#f9f5ff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+          <input class="input-field" type="text" placeholder="Posisi">
+          <input class="input-field" type="text" placeholder="Perusahaan">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <input class="input-field" type="text" placeholder="Tahun Mulai">
+            <input class="input-field" type="text" placeholder="Tahun Selesai">
+          </div>
+          <textarea class="input-field" rows="4" placeholder="Deskripsi pekerjaan..." style="resize:none;"></textarea>
+        </div>
+        <button style="background:#ede8ff;color:#7B2CBF;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;border:none;cursor:pointer;margin-bottom:20px;">+ Tambah Pengalaman</button>
+        <div style="height:1px;background:#f0ecff;margin-bottom:16px;"></div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:12px;">Pendidikan</div>
+        <div style="background:#f9f5ff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+          <input class="input-field" type="text" placeholder="Nama Institusi">
+          <input class="input-field" type="text" placeholder="Jurusan">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <input class="input-field" type="text" placeholder="Tahun Mulai">
+            <input class="input-field" type="text" placeholder="Tahun Lulus">
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="setStep(1)" style="flex:1;padding:14px;border-radius:14px;background:#f5f3ff;color:#7B2CBF;font-weight:700;font-size:14px;border:none;cursor:pointer;">← Kembali</button>
+          <button onclick="setStep(3)" style="flex:2;" class="btn-primary">Selanjutnya →</button>
+        </div>
+        </div>
+      </div>
+      <!-- STEP 3: Skills -->
+      <div id="cv-step3" style="padding:20px 20px 100px;display:none;">
+        <div class="page-inner-content" style="padding:0;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+          <i class="fas fa-briefcase" style="color:#7B2CBF;font-size:18px;"></i>
+          <span style="font-size:18px;font-weight:800;color:#1a1a2e;">Skills & Sertifikat</span>
+        </div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:10px;">Skills</div>
+        <div style="background:#f5f3ff;border-radius:14px;padding:12px 16px;margin-bottom:12px;border:1.5px solid #ede8ff;">
+          <input type="text" placeholder="Tambahkan skill (contoh: Excel, Figma, dsb.)" style="background:transparent;border:none;outline:none;font-size:14px;color:#333;width:100%;">
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+          <div class="skill-tag">Digital Marketing <span onclick="this.parentElement.remove()" style="cursor:pointer;opacity:0.7;">×</span></div>
+          <div class="skill-tag">Communication <span onclick="this.parentElement.remove()" style="cursor:pointer;opacity:0.7;">×</span></div>
+          <div class="skill-tag">Excel <span onclick="this.parentElement.remove()" style="cursor:pointer;opacity:0.7;">×</span></div>
+          <div class="skill-tag">Python <span onclick="this.parentElement.remove()" style="cursor:pointer;opacity:0.7;">×</span></div>
+        </div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:12px;">Sertifikat</div>
+        <div style="background:#f9f5ff;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+          <input class="input-field" type="text" placeholder="Nama Sertifikat">
+          <input class="input-field" type="text" placeholder="Penerbit">
+          <input class="input-field" type="text" placeholder="Tahun">
+        </div>
+        <button style="background:#ede8ff;color:#7B2CBF;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;border:none;cursor:pointer;margin-bottom:20px;">+ Tambah Sertifikat</button>
+        <div style="display:flex;gap:10px;">
+          <button onclick="setStep(2)" style="flex:1;padding:14px;border-radius:14px;background:#f5f3ff;color:#7B2CBF;font-weight:700;font-size:14px;border:none;cursor:pointer;">← Kembali</button>
+          <button onclick="alert('CV berhasil dibuat! ✦')" style="flex:2;" class="btn-primary">✦ Generate CV</button>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="switchNav('home')"><i class="fas fa-house"></i><span>Home</span></div>
+      <div class="nav-item" onclick="switchNav('kursus')"><i class="fas fa-book-open"></i><span>Kursus</span></div>
+      <div class="nav-item" onclick="switchNav('lowongan')"><i class="fas fa-briefcase"></i><span>Lowongan</span></div>
+      <div class="nav-item active" onclick="switchNav('cv');setStep(1);"><i class="fas fa-file-lines"></i><span>CV AI</span></div>
+      <div class="nav-item" onclick="switchNav('profil')"><i class="fas fa-circle-user"></i><span>Profil</span></div>
+    </div>
+  </div>
+
+  <!-- ====== PROFIL PAGE ====== -->
+  <div id="page-profil" class="page" style="height:100%;flex-direction:column;">
+    <div class="content-scroll" style="flex:1;">
+      <div style="background:linear-gradient(160deg,#9B4FD8 0%,#b97fef 100%);padding:40px 20px 70px;text-align:center;position:relative;border-radius:0 0 36px 36px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);margin-bottom:24px;" class="status-bar-row">
+          <span>9:41</span>
+          
+        </div>
+        <div style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.3);margin:0 auto 14px;border:3px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;">
+          <i class="fas fa-user" style="font-size:32px;color:rgba(255,255,255,0.7);"></i>
+        </div>
+        <div style="font-size:20px;font-weight:800;color:white;margin-bottom:4px;">Miranda Fauza</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.75);">sadazaahirah@example.com</div>
+      </div>
+      <div class="page-inner-content" style="padding-top:20px;padding-bottom:100px;">
+        <div class="profile-inner">
+        <div style="background:white;border-radius:20px;box-shadow:0 8px 32px rgba(123,44,191,0.12);overflow:hidden;">
+          <div style="padding:20px;border-bottom:1px solid #f5f3ff;display:flex;align-items:center;gap:14px;">
+            <div style="width:36px;height:36px;background:#ede8ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fas fa-envelope" style="color:#7B2CBF;font-size:14px;"></i>
+            </div>
+            <div>
+              <div style="font-size:11px;color:#aaa;margin-bottom:2px;">Email Utama</div>
+              <div style="font-size:14px;font-weight:600;color:#1a1a2e;">fauza@example.com</div>
+            </div>
+          </div>
+          <div style="padding:20px;border-bottom:1px solid #f5f3ff;display:flex;align-items:center;gap:14px;">
+            <div style="width:36px;height:36px;background:#ede8ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fas fa-phone" style="color:#7B2CBF;font-size:14px;"></i>
+            </div>
+            <div>
+              <div style="font-size:11px;color:#aaa;margin-bottom:2px;">No Telepon</div>
+              <div style="font-size:14px;font-weight:600;color:#1a1a2e;">+62 812 3456 7890</div>
+            </div>
+          </div>
+          <div style="padding:20px;display:flex;align-items:center;gap:14px;">
+            <div style="width:36px;height:36px;background:#ede8ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fas fa-location-dot" style="color:#7B2CBF;font-size:14px;"></i>
+            </div>
+            <div>
+              <div style="font-size:11px;color:#aaa;margin-bottom:2px;">Lokasi</div>
+              <div style="font-size:14px;font-weight:600;color:#1a1a2e;">Jakarta, Indonesia</div>
+            </div>
+          </div>
+        </div>
+        <button style="margin-top:16px;width:100%;padding:14px;border-radius:14px;background:#f5f3ff;color:#7B2CBF;font-weight:700;font-size:14px;border:1.5px solid #ede8ff;cursor:pointer;">
+          <i class="fas fa-pen" style="margin-right:6px;font-size:13px;"></i> Edit Profil
+        </button>
+        <button onclick="showPage('splash')" style="margin-top:10px;width:100%;padding:14px;border-radius:14px;background:#fff0f5;color:#C0007A;font-weight:700;font-size:14px;border:1.5px solid #ffd5e8;cursor:pointer;">
+          <i class="fas fa-right-from-bracket" style="margin-right:6px;font-size:13px;"></i> Keluar
+        </button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="switchNav('home')"><i class="fas fa-house"></i><span>Home</span></div>
+      <div class="nav-item" onclick="switchNav('kursus')"><i class="fas fa-book-open"></i><span>Kursus</span></div>
+      <div class="nav-item" onclick="switchNav('lowongan')"><i class="fas fa-briefcase"></i><span>Lowongan</span></div>
+      <div class="nav-item" onclick="switchNav('cv');setStep(1);"><i class="fas fa-file-lines"></i><span>CV AI</span></div>
+      <div class="nav-item active" onclick="switchNav('profil')"><i class="fas fa-circle-user"></i><span>Profil</span></div>
+    </div>
+  </div>
+
+  </div><!-- end app-layout -->
+</div><!-- end phone-shell -->
+
+<script src="script.js"></script>
+</body>
+</html>
